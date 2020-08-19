@@ -3,10 +3,11 @@ package controller
 import (
 	"database/sql"
 	"github.com/gin-gonic/gin"
+	"github.com/helloGin/database"
+	"github.com/helloGin/model"
 	"log"
 	"net/http"
-	"program/com.ypc/helloGin/database"
-	"program/com.ypc/helloGin/model"
+
 )
 
 
@@ -27,7 +28,7 @@ func QueryParam(context *gin.Context) {
 	context.ShouldBind(&u)
 
 	println(u.Username)
-	rows := db.QueryRow("select username,address,age,mobile,sex from t_user where id = $1 and username = $2",id,name)
+	rows := db.QueryRow("select username,address,age,mobile,sex from t_user where id = ? and username = ?",id,name)
 	var user model.User
 	err := rows.Scan(&user.Username,&user.Address,&user.Age,&user.Mobile,&user.Sex)
 	checkError(err)
@@ -47,7 +48,7 @@ func QueryById (context *gin.Context) {
 	name := context.Param("username")
 
 	// 查询数据库
-	rows := db.QueryRow("select username,address,age,mobile,sex from t_user where id = $1 and username = $2",id,name)
+	rows := db.QueryRow("select username,address,age,mobile,sex from t_user where id = ? and username = ?",id,name)
 
 	var user model.User
 	//var username string
@@ -80,7 +81,7 @@ func InsertNewUser (context *gin.Context) {
 	err := context.ShouldBindJSON(&user)
 
 	// 写入数据库
-	res,err := db.Exec("insert into t_user (username,sex,address,mobile,age) values ($1,$2,$3,$4,$5)",
+	res,err := db.Exec("insert into t_user (username,sex,address,mobile,age) values (?,?,?,?,?)",
 		&user.Username,&user.Sex,&user.Address,&user.Mobile,&user.Age)
 	var count int64
 	count,err = res.RowsAffected()
@@ -105,7 +106,7 @@ func PostForm(context *gin.Context) {
 	// 绑定参数到结构体
 	context.Bind(&u)
 	context.ShouldBind(&u)
-	res,err := db.Exec("insert into t_user (username,sex,address,mobile,age) values ($1,$2,$3,$4,$5)",
+	res,err := db.Exec("insert into t_user (username,sex,address,mobile,age) values (?,?,?,?,?)",
 		&u.Username,&u.Sex,&u.Address,&u.Mobile,&u.Age)
 	var count int64
 	count,err = res.RowsAffected()

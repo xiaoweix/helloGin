@@ -2,8 +2,8 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/helloGin/controller"
 	"net/http"
-	"program/com.ypc/helloGin/controller"
 )
 
 func main()  {
