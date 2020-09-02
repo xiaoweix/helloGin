@@ -13,21 +13,10 @@ const (
 	password = "xxw2020"
 	ip = "127.0.0.1"
 	port = "3306"
-	dbName = "student"
+	dbName = "student" //数据库名称
 )
 
 func GetDataBase() *sql.DB {
-
-	//postgres数据库
-	//url := "postgres://postgres:123456@localhost/gosql?sslmode=disable"
-	//log.Println(">>>> get database connection action start <<<<")
-	//db, err := sql.Open("postgres", url)
-	//if err != nil {
-	//	log.Fatal(err)
-	//}
-	//
-	//// 返回数据库连接
-	//return db
 
 	//mysql 数据库
 	//构建连接："用户名:密码@tcp(IP:端口)/数据库?charset=utf8"

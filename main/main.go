@@ -15,63 +15,6 @@ func main()  {
 	router.LoadHTMLGlob("template/*")
 	router.GET("/hello", hello)
 
-	// 请求参数在request header
-	//router.POST("/user/add", func(context *gin.Context) {
-	//	name := context.Request.FormValue("username")
-	//	age := context.Request.PostForm.Get("age")
-	//	moblie := context.Request.FormValue("mobile")
-	//	sex := context.Request.FormValue("sex")
-	//	param := ">>>> name=" + name + ",age=" + age + ",mobile" + moblie + ",sex=" + sex + " <<<<"
-	//	log.Println(param)
-	//
-	//	var res *model.CommonResponse = new(model.CommonResponse)
-	//
-	//	res.Status = "200"
-	//	res.Code = 200
-	//	res.Message = "success"
-	//	bytes,err := json.Marshal(res)
-	//	if err != nil {
-	//		log.Fatal(err)
-	//	}
-	//	context.Writer.Write(bytes)
-	//})
-	//
-	//// 请求参数在body
-	// router.POST("/user/insert", func(context *gin.Context) {
-	//	 var res *model.CommonResponse = new(model.CommonResponse)
-	//	 var user model.User
-	//	 // 从请求体获取二进制流，转结构体
-	//	 bytes,err := ioutil.ReadAll(context.Request.Body)
-	//	 if err != nil {
-	//		 log.Fatal(err)
-	//	 }
-	//
-	//	 err = json.Unmarshal(bytes,&user)
-	//	 if err != nil {
-	//		 log.Fatal(err)
-	//	 }
-	//
-	//	 // 绑定结构体
-	// 	 err = context.ShouldBindJSON(&user)
-	//	 if err != nil {
-	//		 res.Code = 404
-	//		 res.Status = "false"
-	//		 res.Message = "error"
-	//	 } else {
-	//	 	 res.Message = "success"
-	//	 	 res.Code = 200
-	//	 	 res.Status = "true"
-	//	 }
-	//
-	//
-	//
-	//	 bytes,er := json.Marshal(res)
-	//	 if er != nil {
-	//		log.Fatal(err)
-	//	 }
-	// 	 context.Writer.Write(bytes)
-	// })
-
 	// 路由组
 	user := router.Group("/user")
 	{	// 请求参数在请求路径上
